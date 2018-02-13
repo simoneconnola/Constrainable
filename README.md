@@ -24,12 +24,12 @@ view.addLayoutGuide(spacer)
 firstLabel.translatesAutoresizingMaskIntoConstraints = false
 secondLabel.translatesAutoresizingMaskIntoConstraints = false
 
-// Container has the same edges as view, with 20 points padding
+// Container has the same edges as the view's layoutMarginsGuide
 NSLayoutConstraint.activate([
-    container.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-    container.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-    container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-    container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+    container.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+    container.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+    container.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+    container.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
 ])
 
 // firstLabel and secondLabel are vertically centered in the container, have the same size and are separated by a 20 points spacer
@@ -60,10 +60,9 @@ view.addLayoutGuide(container)
 view.addLayoutGuide(spacer)
 
 
-// Container has the same edges as view, with 20 points padding
-let padding = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+// Container has the same edges as the view's layoutMarginsGuide
 container.activate(
-    constraint(edgesTo: view, with: padding)
+    constraint(edgesTo: view.layoutMarginsGuide)
 )
 
 
@@ -88,3 +87,71 @@ secondLabel.activate([
 ## Full NSLayoutConstraint features:
 
 You can specify the kind of relation between constrainable objects (equal, lessThanOrEqual, greaterThanOrEqual), the constant, the multiplier (even for NSLayoutAnchor), and the layout priority
+
+## Tips and tricks:
+
+• You can constrain a dimension to a constant: 
+```Swift
+constraint(\.widthAnchor, to: 10)
+constraint(\.heightAnchor, to: 10)
+```
+• If you are constraining two objects to the same anchor, you can use the "same" shorthand:
+```Swift
+// These:
+constraint(\.topAnchor, to: \.topAnchor, of: someView)
+constraint(\.widthAnchor, to: \.widthAnchor, of: someView)
+
+// Are the same as these:
+constraint(same: \.topAnchor, as: someView)
+constraint(same: \.widthAnchor, as: someView)
+```
+
+• You can constrain both dimension at the same time:
+```Swift
+// This:
+constraint(same: \.heightAnchor, as: someView, multiplier: 2)
+constraint(same: \.widthAnchor, as: someView, multiplier: 2)
+
+// Is the same as this:
+constraint(sizeAs: someView, multiplier: 2)
+```
+
+• You can constrain all the edges at once (with insets, even):
+```Swift
+// This:
+constraint(same: \.topAnchor, as: someView, offset: 10)
+constraint(same: \.bottomAnchor, as: someView, offset: -10)
+constraint(same: \.leadingAnchor, as: someView, offset: 10)
+constraint(same: \.trailingAnchor, as: someView, offset: -10)
+
+// Is the same as this:
+let padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+constraint(edgesTo: someView, with: padding)
+```
+**Note:** The last two functions return an array of constraints instead of a single one!
+```Swift
+// WRONG:
+someOtherView.activate([
+    constraint(edgesTo: someView)
+])
+
+// RIGHT:
+someOtherView.activate(
+    constraint(edgesTo: someView)
+)
+```
+```Swift
+// WRONG:
+someOtherView.activate([
+    constraint(sizeAs: someView),
+    constraint(same: \.centerXAnchor, as: someView),
+    constraint(same: \.centerYAnchor, as: someView)
+])
+
+// RIGHT:
+someOtherView.activate(
+    constraint(sizeAs: someView) + [
+    constraint(same: \.centerXAnchor, as: someView),
+    constraint(same: \.centerYAnchor, as: someView)
+])
+```
