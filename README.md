@@ -3,7 +3,7 @@
 ![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Based on [Chris Eidhof's idea](http://chris.eidhof.nl/post/micro-autolayout-dsl/) and [Marcin Siemaszko's expanded implementation](https://www.netguru.co/codestories/painless-nslayoutanchors?utm_campaign=Revue%20newsletter&utm_medium=Swift%20Weekly%20Newsletter%20Issue%20102&utm_source=Swift%20Weekly), a programmatic autolayout µframework that supports Keypath–based declarative layout for both views and layout guides (plus some syntactic sugar)
+Based on [Chris Eidhof's idea](http://chris.eidhof.nl/post/micro-autolayout-dsl/) and [Marcin Siemaszko's expanded implementation](https://www.netguru.co/codestories/painless-nslayoutanchors), a programmatic autolayout µframework that supports Keypath–based declarative layout for both views and layout guides (plus some syntactic sugar)
 
 ## At a glace:
 
@@ -83,7 +83,7 @@ secondLabel.activate([
     constraint(same: \.widthAnchor, as: firstLabel),
 ])
 ```
-## Full NSLayoutConnstraint customization:
+## Full NSLayoutConstraint customization:
 
 You can specify the kind of relationship between constrainable objects (equal, lessThanOrEqual, greaterThanOrEqual), offset and multiplier (even for NSLayoutAnchor!)
 
