@@ -32,7 +32,7 @@ NSLayoutConstraint.activate([
     container.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
 ])
 
-// firstLabel and secondLabel are vertically centered in the container, have the same size and are separated by a 20 points spacer
+// firstLabel and secondLabel are vertically centered in the container, have the same width and are separated by a 20 points spacer
 NSLayoutConstraint.activate([
     firstLabel.centerYAnchor.constraint(equalTo: container.centerYAnchor),
     firstLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor),
@@ -66,7 +66,7 @@ container.activate(
 )
 
 
-// firstLabel and secondLabel are vertically centered in the container, have the same size and are separated by a 20 points spacer
+// firstLabel and secondLabel are vertically centered in the container, have the same width and are separated by a 20 points spacer
 firstLabel.activate([
     constraint(same: \.centerYAnchor, as: container),
     constraint(same: \.leadingAnchor, as: container),
