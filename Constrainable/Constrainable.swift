@@ -65,6 +65,10 @@ public func constraint<LayoutDimension>(_ originKeyPath: KeyPath<Constrainable, 
     }
 }
 
+public func constraint<LayoutDimension>(same keyPath: KeyPath<Constrainable, LayoutDimension>, as destination: Constrainable, relationship: ConstraintRelationship = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1) -> Constraint where LayoutDimension: NSLayoutDimension {
+    return constraint(keyPath, to: keyPath, of: destination, relationship: relationship, offset: offset, multiplier: multiplier)
+}
+
 public func constraint<LayoutDimension>(_ keyPath: KeyPath<Constrainable, LayoutDimension>, to constant: CGFloat) -> Constraint where LayoutDimension: NSLayoutDimension {
     return { constrainable in
         return constrainable[keyPath: keyPath].constraint(equalToConstant: constant)
