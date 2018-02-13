@@ -101,11 +101,11 @@ constraint(\.heightAnchor, to: 10)
 ```
 • If you are constraining two objects to the same anchor, you can use the "same" shorthand:
 ```Swift
-// These:
+// This:
 constraint(\.topAnchor, to: \.topAnchor, of: someView)
 constraint(\.widthAnchor, to: \.widthAnchor, of: someView)
 
-// Are the same as these:
+// Is the same as this:
 constraint(same: \.topAnchor, as: someView)
 constraint(same: \.widthAnchor, as: someView)
 ```
