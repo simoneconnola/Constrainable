@@ -31,14 +31,14 @@ public extension Constrainable {
 
 public typealias Constraint = (_ constrainable: Constrainable) -> NSLayoutConstraint
 
-public enum ConstraintRelationship {
+public enum ConstraintsRelation {
     case equal, lessThanOrEqual, greaterThanOrEqual
 }
 
-public func constraint<Anchor, Axis>(_ originKeyPath: KeyPath<Constrainable, Anchor>, to destinationKeyPath: KeyPath<Constrainable, Anchor>, of destination: Constrainable, relationship: ConstraintRelationship = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where Anchor: NSLayoutAnchor<Axis> {
+public func constraint<Anchor, Axis>(_ originKeyPath: KeyPath<Constrainable, Anchor>, to destinationKeyPath: KeyPath<Constrainable, Anchor>, of destination: Constrainable, relation: ConstraintsRelation = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where Anchor: NSLayoutAnchor<Axis> {
     return { constrainable in
         let constraint: NSLayoutConstraint
-        switch relationship {
+        switch relation {
         case .equal:
             constraint = constrainable[keyPath: originKeyPath].constraint(equalTo: destination[keyPath: destinationKeyPath], constant: offset).withMultiplier(multiplier)
         case .lessThanOrEqual:
@@ -51,14 +51,14 @@ public func constraint<Anchor, Axis>(_ originKeyPath: KeyPath<Constrainable, Anc
     }
 }
 
-public func constraint<Anchor, Axis>(same keyPath: KeyPath<Constrainable, Anchor>, as destination: Constrainable, relationship: ConstraintRelationship = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where Anchor: NSLayoutAnchor<Axis> {
-    return constraint(keyPath, to: keyPath, of: destination, relationship: relationship, offset: offset, multiplier: multiplier, priority: priority)
+public func constraint<Anchor, Axis>(same keyPath: KeyPath<Constrainable, Anchor>, as destination: Constrainable, relation: ConstraintsRelation = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where Anchor: NSLayoutAnchor<Axis> {
+    return constraint(keyPath, to: keyPath, of: destination, relation: relation, offset: offset, multiplier: multiplier, priority: priority)
 }
 
-public func constraint<LayoutDimension>(_ originKeyPath: KeyPath<Constrainable, LayoutDimension>, to destinationKeyPath: KeyPath<Constrainable, LayoutDimension>, of destination: Constrainable, relationship: ConstraintRelationship = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where LayoutDimension: NSLayoutDimension {
+public func constraint<LayoutDimension>(_ originKeyPath: KeyPath<Constrainable, LayoutDimension>, to destinationKeyPath: KeyPath<Constrainable, LayoutDimension>, of destination: Constrainable, relation: ConstraintsRelation = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where LayoutDimension: NSLayoutDimension {
     return { constrainable in
         let constraint: NSLayoutConstraint
-        switch relationship {
+        switch relation {
         case .equal:
             constraint = constrainable[keyPath: originKeyPath].constraint(equalTo: destination[keyPath: destinationKeyPath], multiplier: multiplier, constant: offset)
         case .lessThanOrEqual:
@@ -71,8 +71,8 @@ public func constraint<LayoutDimension>(_ originKeyPath: KeyPath<Constrainable, 
     }
 }
 
-public func constraint<LayoutDimension>(same keyPath: KeyPath<Constrainable, LayoutDimension>, as destination: Constrainable, relationship: ConstraintRelationship = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where LayoutDimension: NSLayoutDimension {
-    return constraint(keyPath, to: keyPath, of: destination, relationship: relationship, offset: offset, multiplier: multiplier, priority: priority)
+public func constraint<LayoutDimension>(same keyPath: KeyPath<Constrainable, LayoutDimension>, as destination: Constrainable, relation: ConstraintsRelation = .equal, offset: CGFloat = 0, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where LayoutDimension: NSLayoutDimension {
+    return constraint(keyPath, to: keyPath, of: destination, relation: relation, offset: offset, multiplier: multiplier, priority: priority)
 }
 
 public func constraint<LayoutDimension>(_ keyPath: KeyPath<Constrainable, LayoutDimension>, to constant: CGFloat) -> Constraint where LayoutDimension: NSLayoutDimension {
@@ -81,19 +81,32 @@ public func constraint<LayoutDimension>(_ keyPath: KeyPath<Constrainable, Layout
     }
 }
 
+public func constraint(sizeAs destination: Constrainable, relation: ConstraintsRelation = .equal, multiplier: CGFloat = 1) -> [Constraint] {
+
+    let width: Constraint = { constrainable in
+        constraint(same: \.widthAnchor, as: destination, relation: relation, multiplier: multiplier)(constrainable)
+    }
+
+    let height: Constraint = { constrainable in
+        constraint(same: \.heightAnchor, as: destination, relation: relation, multiplier: multiplier)(constrainable)
+    }
+
+    return [width, height]
+}
+
 public func constraint(edgesTo destination: Constrainable, with insets: UIEdgeInsets = .zero) -> [Constraint] {
 
     let top: Constraint = { constrainable  in
-        return constrainable.topAnchor.constraint(equalTo: destination.topAnchor, constant: insets.top)
+        constraint(same: \.topAnchor, as: destination, offset: insets.top)(constrainable)
     }
     let bottom: Constraint = { constrainable in
-        return constrainable.bottomAnchor.constraint(equalTo: destination.bottomAnchor, constant: -insets.bottom)
+        constraint(same: \.bottomAnchor, as: destination, offset: -insets.bottom)(constrainable)
     }
     let leading: Constraint = { constrainable in
-        return constrainable.leadingAnchor.constraint(equalTo: destination.leadingAnchor, constant: insets.left)
+        constraint(same: \.leadingAnchor, as: destination, offset: insets.left)(constrainable)
     }
     let trailing: Constraint = { constrainable in
-        return constrainable.trailingAnchor.constraint(equalTo: destination.trailingAnchor, constant: -insets.right)
+        constraint(same: \.trailingAnchor, as: destination, offset: -insets.right)(constrainable)
     }
 
     return [top, bottom, leading, trailing]
