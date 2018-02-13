@@ -88,6 +88,10 @@ secondLabel.activate([
 
 You can specify the kind of relation between constrainable objects (equal, lessThanOrEqual, greaterThanOrEqual), the constant, the multiplier (even for NSLayoutAnchor), and the layout priority
 
+```Swift
+constraint(\.topAnchor, to: \.bottomAnchor, of: someView, relation: .lessThanOrEqual, offset: 10, multiplier: 0.5, priority: .defaultLow)
+```
+
 ## Tips and tricks:
 
 • You can constrain a dimension to a constant: 
