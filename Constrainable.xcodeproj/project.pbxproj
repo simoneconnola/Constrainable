@@ -7,30 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D0F27C92032F1610081802A /* Constrainable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D0F27BF2032F1610081802A /* Constrainable.framework */; };
-		1D0F27CE2032F1610081802A /* ConstrainableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F27CD2032F1610081802A /* ConstrainableTests.swift */; };
 		1D0F27D02032F1610081802A /* Constrainable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D0F27C22032F1610081802A /* Constrainable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D0F27DA2032F16F0081802A /* Constrainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F27D92032F16F0081802A /* Constrainable.swift */; };
 		1D0F27DE2032F25A0081802A /* NSLayoutConstraint + multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F27DD2032F25A0081802A /* NSLayoutConstraint + multiplier.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1D0F27CA2032F1610081802A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1D0F27B62032F1610081802A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D0F27BE2032F1610081802A;
-			remoteInfo = Constrainable;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1D0F27BF2032F1610081802A /* Constrainable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Constrainable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0F27C22032F1610081802A /* Constrainable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constrainable.h; sourceTree = "<group>"; };
 		1D0F27C32032F1610081802A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1D0F27C82032F1610081802A /* ConstrainableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConstrainableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D0F27CD2032F1610081802A /* ConstrainableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstrainableTests.swift; sourceTree = "<group>"; };
-		1D0F27CF2032F1610081802A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D0F27D92032F16F0081802A /* Constrainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constrainable.swift; sourceTree = "<group>"; };
 		1D0F27DD2032F25A0081802A /* NSLayoutConstraint + multiplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint + multiplier.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,14 +28,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D0F27C52032F1610081802A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D0F27C92032F1610081802A /* Constrainable.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -58,7 +35,6 @@
 			isa = PBXGroup;
 			children = (
 				1D0F27C12032F1610081802A /* Constrainable */,
-				1D0F27CC2032F1610081802A /* ConstrainableTests */,
 				1D0F27C02032F1610081802A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				1D0F27BF2032F1610081802A /* Constrainable.framework */,
-				1D0F27C82032F1610081802A /* ConstrainableTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,15 +56,6 @@
 				1D0F27DD2032F25A0081802A /* NSLayoutConstraint + multiplier.swift */,
 			);
 			path = Constrainable;
-			sourceTree = "<group>";
-		};
-		1D0F27CC2032F1610081802A /* ConstrainableTests */ = {
-			isa = PBXGroup;
-			children = (
-				1D0F27CD2032F1610081802A /* ConstrainableTests.swift */,
-				1D0F27CF2032F1610081802A /* Info.plist */,
-			);
-			path = ConstrainableTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,24 +90,6 @@
 			productReference = 1D0F27BF2032F1610081802A /* Constrainable.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		1D0F27C72032F1610081802A /* ConstrainableTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1D0F27D62032F1610081802A /* Build configuration list for PBXNativeTarget "ConstrainableTests" */;
-			buildPhases = (
-				1D0F27C42032F1610081802A /* Sources */,
-				1D0F27C52032F1610081802A /* Frameworks */,
-				1D0F27C62032F1610081802A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1D0F27CB2032F1610081802A /* PBXTargetDependency */,
-			);
-			name = ConstrainableTests;
-			productName = ConstrainableTests;
-			productReference = 1D0F27C82032F1610081802A /* ConstrainableTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -155,10 +103,6 @@
 					1D0F27BE2032F1610081802A = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
-					};
-					1D0F27C72032F1610081802A = {
-						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -176,20 +120,12 @@
 			projectRoot = "";
 			targets = (
 				1D0F27BE2032F1610081802A /* Constrainable */,
-				1D0F27C72032F1610081802A /* ConstrainableTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D0F27BD2032F1610081802A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D0F27C62032F1610081802A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -208,23 +144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D0F27C42032F1610081802A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D0F27CE2032F1610081802A /* ConstrainableTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1D0F27CB2032F1610081802A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D0F27BE2032F1610081802A /* Constrainable */;
-			targetProxy = 1D0F27CA2032F1610081802A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D0F27D12032F1610081802A /* Debug */ = {
@@ -385,36 +305,6 @@
 			};
 			name = Release;
 		};
-		1D0F27D72032F1610081802A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64C62M2292;
-				INFOPLIST_FILE = ConstrainableTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.simoneconnola.ConstrainableTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		1D0F27D82032F1610081802A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64C62M2292;
-				INFOPLIST_FILE = ConstrainableTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.simoneconnola.ConstrainableTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -432,15 +322,6 @@
 			buildConfigurations = (
 				1D0F27D42032F1610081802A /* Debug */,
 				1D0F27D52032F1610081802A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1D0F27D62032F1610081802A /* Build configuration list for PBXNativeTarget "ConstrainableTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D0F27D72032F1610081802A /* Debug */,
-				1D0F27D82032F1610081802A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
