@@ -62,7 +62,9 @@ view.addLayoutGuide(spacer)
 
 // Container has the same edges as view, with 20 points padding
 let padding = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-container.activate(sameEdges(as: view, with: padding))
+container.activate(
+    constraint(edgesTo: view, with: padding)
+)
 
 
 // firstLabel and secondLabel are vertically centered in the container, have the same size and are separated by a 20 points spacer
@@ -83,28 +85,6 @@ secondLabel.activate([
     constraint(same: \.widthAnchor, as: firstLabel),
 ])
 ```
-## Full NSLayoutConstraint customization:
+## Full NSLayoutConstraint features:
 
-You can specify the kind of relationship between constrainable objects (equal, lessThanOrEqual, greaterThanOrEqual), offset and multiplier (even for NSLayoutAnchor!)
-
-```Swift
-public enum ConstraintRelationship {
-    case equal, lessThanOrEqual, greaterThanOrEqual
-}
-
-public func constraint<Anchor, Axis>(
-    _ originKeyPath: KeyPath<Constrainable, Anchor>, 
-    to destinationKeyPath: KeyPath<Constrainable, Anchor>, 
-    of destination: Constrainable, 
-    relationship: ConstraintRelationship = .equal, 
-    offset: CGFloat = 0, 
-    multiplier: CGFloat = 1) -> Constraint where Anchor: NSLayoutAnchor<Axis>
-
-public func constraint<LayoutDimension>(
-    _ originKeyPath: KeyPath<Constrainable, LayoutDimension>, 
-    to destinationKeyPath: KeyPath<Constrainable, LayoutDimension>, 
-    of destination: Constrainable, 
-    relationship: ConstraintRelationship = .equal, 
-    offset: CGFloat = 0, 
-    multiplier: CGFloat = 1) -> Constraint where LayoutDimension: NSLayoutDimension
-```
+You can specify the kind of relation between constrainable objects (equal, lessThanOrEqual, greaterThanOrEqual), the constant, the multiplier (even for NSLayoutAnchor), and the layout priority
