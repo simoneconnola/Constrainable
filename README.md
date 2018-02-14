@@ -60,12 +60,10 @@ view.addSubview(secondLabel)
 view.addLayoutGuide(container)
 view.addLayoutGuide(spacer)
 
-
 // Container has the same edges as the view's layoutMarginsGuide
 container.activate(
     constraint(edgesTo: view.layoutMarginsGuide)
 )
-
 
 // firstLabel and secondLabel are vertically centered in the container, have the same width and are separated by a 20 points spacer
 firstLabel.activate([
