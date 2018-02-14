@@ -160,3 +160,17 @@ someOtherView.activate(
     constraint(same: \.centerYAnchor, as: someView)
 ])
 ```
+• For animations, you can store the constraint in a lazy variable:
+```Swift
+lazy var animatableCenterY = constraint(same: \.centerYAnchor, as: someView)(someOtherView)
+
+someOtherView.activate([
+... // Other constraints
+])
+animatableCenterY.isActive = true
+
+animatableCenterY.constant = 100
+UIView.animate(withDuration: 0.25) {
+    self.view.layoutIfNeeded()
+}
+```
