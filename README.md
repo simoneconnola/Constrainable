@@ -1,6 +1,7 @@
 # Constrainable
 
 ![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg)
+[![](http://img.shields.io/badge/iOS-11.0%2B-blue.svg)]()
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Based on [Chris Eidhof's idea](http://chris.eidhof.nl/post/micro-autolayout-dsl/) and [Marcin Siemaszko's expanded implementation](https://www.netguru.co/codestories/painless-nslayoutanchors), a programmatic autolayout µframework that supports Keypath–based declarative layout for both **views** and **layout guides** (plus some syntactic sugar)
