@@ -75,9 +75,11 @@ public func constraint<LayoutDimension>(same keyPath: KeyPath<Constrainable, Lay
     return constraint(keyPath, to: keyPath, of: destination, relation: relation, offset: offset, multiplier: multiplier, priority: priority)
 }
 
-public func constraint<LayoutDimension>(_ keyPath: KeyPath<Constrainable, LayoutDimension>, to constant: CGFloat) -> Constraint where LayoutDimension: NSLayoutDimension {
+public func constraint<LayoutDimension>(_ keyPath: KeyPath<Constrainable, LayoutDimension>, to constant: CGFloat, priority: UILayoutPriority = .required) -> Constraint where LayoutDimension: NSLayoutDimension {
     return { constrainable in
-        return constrainable[keyPath: keyPath].constraint(equalToConstant: constant)
+        let constraint = constrainable[keyPath: keyPath].constraint(equalToConstant: constant)
+        constraint.priority = priority
+        return constraint
     }
 }
 
