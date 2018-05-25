@@ -30,12 +30,31 @@ extension UILayoutGuide: Constrainable {
 public extension Constrainable {
 
     @discardableResult func activate(_ constraintDescriptions: [Constraint]) -> [NSLayoutConstraint] {
+        let constraints = bind(constraintDescriptions)
+        NSLayoutConstraint.activate(constraints)
+        return constraints
+    }
+
+    @discardableResult func activate(_ constraintDescription: Constraint) -> NSLayoutConstraint {
+        let constraint = bind(constraintDescription)
+        NSLayoutConstraint.activate([constraint])
+        return constraint
+    }
+
+    @discardableResult func bind(_ constraintDescriptions: [Constraint]) -> [NSLayoutConstraint] {
         if let view = self as? UIView {
             view.translatesAutoresizingMaskIntoConstraints = false
         }
         let constraints = constraintDescriptions.map { $0(self) }
-        NSLayoutConstraint.activate(constraints)
         return constraints
+    }
+
+    @discardableResult func bind(_ constraintDescription: Constraint) -> NSLayoutConstraint {
+        if let view = self as? UIView {
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        let constraint = constraintDescription(self)
+        return constraint
     }
 }
 
