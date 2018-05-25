@@ -12,10 +12,20 @@ public protocol Constrainable {
     var centerYAnchor: NSLayoutYAxisAnchor { get }
     var widthAnchor: NSLayoutDimension { get }
     var heightAnchor: NSLayoutDimension { get }
+    var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
+    var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
 }
 
 extension UIView: Constrainable {}
-extension UILayoutGuide: Constrainable {}
+extension UILayoutGuide: Constrainable {
+
+    public var firstBaselineAnchor: NSLayoutYAxisAnchor {
+        return topAnchor
+    }
+    public var lastBaselineAnchor: NSLayoutYAxisAnchor {
+        return bottomAnchor
+    }
+}
 
 public extension Constrainable {
 
@@ -75,9 +85,9 @@ public func constraint<LayoutDimension>(same keyPath: KeyPath<Constrainable, Lay
     return constraint(keyPath, to: keyPath, of: destination, relation: relation, offset: offset, multiplier: multiplier, priority: priority)
 }
 
-public func constraint<LayoutDimension>(_ keyPath: KeyPath<Constrainable, LayoutDimension>, to constant: CGFloat, priority: UILayoutPriority = .required) -> Constraint where LayoutDimension: NSLayoutDimension {
+public func constraint<LayoutDimension>(_ keyPath: KeyPath<Constrainable, LayoutDimension>, to constant: CGFloat, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> Constraint where LayoutDimension: NSLayoutDimension {
     return { constrainable in
-        let constraint = constrainable[keyPath: keyPath].constraint(equalToConstant: constant)
+        let constraint = constrainable[keyPath: keyPath].constraint(equalToConstant: (constant * multiplier))
         constraint.priority = priority
         return constraint
     }
@@ -91,6 +101,19 @@ public func constraint(sizeAs destination: Constrainable, relation: ConstraintsR
 
     let height: Constraint = { constrainable in
         constraint(same: \.heightAnchor, as: destination, relation: relation, multiplier: multiplier)(constrainable)
+    }
+
+    return [width, height]
+}
+
+public func constraint(sizeTo constant: CGSize, multiplier: CGFloat = 1, priority: UILayoutPriority = .required) -> [Constraint] {
+
+    let width: Constraint = { constrainable in
+        constraint(\.widthAnchor, to: constant.width, multiplier: multiplier, priority: priority)(constrainable)
+    }
+
+    let height: Constraint = { constrainable in
+        constraint(\.heightAnchor, to: constant.height, multiplier: multiplier, priority: priority)(constrainable)
     }
 
     return [width, height]
