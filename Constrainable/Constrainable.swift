@@ -34,11 +34,11 @@ public extension Constrainable {
         NSLayoutConstraint.activate(constraints)
         return constraints
     }
-
-    @discardableResult func activate(_ constraintDescription: Constraint) -> NSLayoutConstraint {
-        let constraint = bind(constraintDescription)
-        NSLayoutConstraint.activate([constraint])
-        return constraint
+    
+    @discardableResult func activate(_ constraintDescriptions: Constraint...) -> [NSLayoutConstraint] {
+        let constraints = bind(constraintDescriptions)
+        NSLayoutConstraint.activate(constraints)
+        return constraints
     }
 
     @discardableResult func bind(_ constraintDescriptions: [Constraint]) -> [NSLayoutConstraint] {
@@ -48,13 +48,13 @@ public extension Constrainable {
         let constraints = constraintDescriptions.map { $0(self) }
         return constraints
     }
-
-    @discardableResult func bind(_ constraintDescription: Constraint) -> NSLayoutConstraint {
+    
+    @discardableResult func bind(_ constraintDescriptions: Constraint...) -> [NSLayoutConstraint] {
         if let view = self as? UIView {
             view.translatesAutoresizingMaskIntoConstraints = false
         }
-        let constraint = constraintDescription(self)
-        return constraint
+        let constraints = constraintDescriptions.map { $0(self) }
+        return constraints
     }
 }
 
