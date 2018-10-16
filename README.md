@@ -1,6 +1,6 @@
 # Constrainable
 
-![Swift](https://img.shields.io/badge/Swift-4.0-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg)
 [![](http://img.shields.io/badge/iOS-11.0%2B-blue.svg)]()
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -90,6 +90,19 @@ You can specify the kind of relation between constrainable objects (equal, lessT
 ```Swift
 constraint(\.topAnchor, to: \.bottomAnchor, of: someView, relation: .lessThanOrEqual, offset: 10, multiplier: 0.5, priority: .defaultLow)
 ```
+
+## Shorthand:
+
+Since version 1.0 you can decide to use shorthand for KeyPaths:
+```Swift
+constraint(.top, to: .bottom, of: someView)
+```
+instead of:
+```Swift
+constraint(\.topAnchor, to: \.bottomAnchor, of: someView)
+```
+
+**with autocomplete!** 🎉
 
 ## Tips and tricks:
 
