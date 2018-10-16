@@ -108,25 +108,25 @@ constraint(\.topAnchor, to: \.bottomAnchor, of: someView)
 
 • You can constrain a dimension to a constant: 
 ```Swift
-constraint(\.widthAnchor, to: 10)
-constraint(\.heightAnchor, to: 10)
+constraint(.width, to: 10)
+constraint(.height, to: 10)
 ```
 • If you are constraining two objects to the same anchor, you can use the "same" shorthand:
 ```Swift
 // This:
-constraint(\.topAnchor, to: \.topAnchor, of: someView)
-constraint(\.widthAnchor, to: \.widthAnchor, of: someView)
+constraint(.top, to: .top, of: someView)
+constraint(.width, to: .width, of: someView)
 
 // Is the same as this:
-constraint(same: \.topAnchor, as: someView)
-constraint(same: \.widthAnchor, as: someView)
+constraint(same: .top, as: someView)
+constraint(same: .width, as: someView)
 ```
 
 • You can constrain both dimension at the same time:
 ```Swift
 // This:
-constraint(same: \.heightAnchor, as: someView, multiplier: 2)
-constraint(same: \.widthAnchor, as: someView, multiplier: 2)
+constraint(same: .height, as: someView, multiplier: 2)
+constraint(same: .width, as: someView, multiplier: 2)
 
 // Is the same as this:
 constraint(sizeAs: someView, multiplier: 2)
@@ -135,10 +135,10 @@ constraint(sizeAs: someView, multiplier: 2)
 • You can constrain all the edges at once (with insets, even):
 ```Swift
 // This:
-constraint(same: \.topAnchor, as: someView, offset: 10)
-constraint(same: \.bottomAnchor, as: someView, offset: -10)
-constraint(same: \.leadingAnchor, as: someView, offset: 10)
-constraint(same: \.trailingAnchor, as: someView, offset: -10)
+constraint(same: .top, as: someView, offset: 10)
+constraint(same: .bottom, as: someView, offset: -10)
+constraint(same: .leading, as: someView, offset: 10)
+constraint(same: .trailing, as: someView, offset: -10)
 
 // Is the same as this:
 let padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -160,20 +160,20 @@ someOtherView.activate(
 // WRONG:
 someOtherView.activate([
     constraint(sizeAs: someView),
-    constraint(same: \.centerXAnchor, as: someView),
-    constraint(same: \.centerYAnchor, as: someView)
+    constraint(same: .centerX, as: someView),
+    constraint(same: .centerY, as: someView)
 ])
 
 // RIGHT:
 someOtherView.activate(
     constraint(sizeAs: someView) + [
-    constraint(same: \.centerXAnchor, as: someView),
-    constraint(same: \.centerYAnchor, as: someView)
+    constraint(same: .centerX, as: someView),
+    constraint(same: .centerY, as: someView)
 ])
 ```
 • For animations, you can store the constraint in a lazy variable:
 ```Swift
-lazy var animatableCenterY = constraint(same: \.centerYAnchor, as: someView)(someOtherView)
+lazy var animatableCenterY = constraint(same: .centerY, as: someView)(someOtherView)
 
 someOtherView.activate([
 ... // Other constraints
