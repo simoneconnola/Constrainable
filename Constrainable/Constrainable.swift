@@ -141,6 +141,19 @@ public func constraint(sizeTo constant: CGSize, multiplier: CGFloat = 1, priorit
     return [width, height]
 }
 
+public func constraint(centerIn reference: Constrainable, priority: UILayoutPriority = .required) -> [Constraint] {
+    
+    let centerX: Constraint = { constrainable in
+        constraint(same: .centerX, as: reference, priority: priority)(constrainable)
+    }
+    
+    let centerY: Constraint = { constrainable in
+        constraint(same: .centerY, as: reference, priority: priority)(constrainable)
+    }
+    
+    return [centerX, centerY]
+}
+
 public func constraint(edgesTo destination: Constrainable, with insets: UIEdgeInsets = .zero) -> [Constraint] {
 
     let top: Constraint = { constrainable  in
