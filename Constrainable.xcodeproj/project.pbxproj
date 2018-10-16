@@ -10,6 +10,7 @@
 		1D0F27D02032F1610081802A /* Constrainable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D0F27C22032F1610081802A /* Constrainable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1D0F27DA2032F16F0081802A /* Constrainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F27D92032F16F0081802A /* Constrainable.swift */; };
 		1D0F27DE2032F25A0081802A /* NSLayoutConstraint + multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F27DD2032F25A0081802A /* NSLayoutConstraint + multiplier.swift */; };
+		1DBC929A2175F4A600F6B424 /* Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBC92992175F4A600F6B424 /* Shorthand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		1D0F27C32032F1610081802A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D0F27D92032F16F0081802A /* Constrainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constrainable.swift; sourceTree = "<group>"; };
 		1D0F27DD2032F25A0081802A /* NSLayoutConstraint + multiplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint + multiplier.swift"; sourceTree = "<group>"; };
+		1DBC92992175F4A600F6B424 /* Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shorthand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 				1D0F27C32032F1610081802A /* Info.plist */,
 				1D0F27D92032F16F0081802A /* Constrainable.swift */,
 				1D0F27DD2032F25A0081802A /* NSLayoutConstraint + multiplier.swift */,
+				1DBC92992175F4A600F6B424 /* Shorthand.swift */,
 			);
 			path = Constrainable;
 			sourceTree = "<group>";
@@ -102,7 +105,7 @@
 				TargetAttributes = {
 					1D0F27BE2032F1610081802A = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -141,6 +144,7 @@
 			files = (
 				1D0F27DE2032F25A0081802A /* NSLayoutConstraint + multiplier.swift in Sources */,
 				1D0F27DA2032F16F0081802A /* Constrainable.swift in Sources */,
+				1DBC929A2175F4A600F6B424 /* Shorthand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +287,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -306,7 +310,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.simoneconnola.Constrainable;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

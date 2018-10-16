@@ -27,6 +27,8 @@ extension UILayoutGuide: Constrainable {
     }
 }
 
+public typealias Constraint = (_ constrainable: Constrainable) -> NSLayoutConstraint
+
 public extension Constrainable {
 
     @discardableResult func activate(_ constraintDescriptions: [Constraint]) -> [NSLayoutConstraint] {
@@ -57,8 +59,6 @@ public extension Constrainable {
         return constraints
     }
 }
-
-public typealias Constraint = (_ constrainable: Constrainable) -> NSLayoutConstraint
 
 public enum ConstraintsRelation {
     case equal, lessThanOrEqual, greaterThanOrEqual
