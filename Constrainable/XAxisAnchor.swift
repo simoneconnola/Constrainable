@@ -5,20 +5,21 @@ import Foundation
 /// Includes: *leading, trailing, left, right, centerX*
 public enum XAxisAnchor {
 
-    case leading, trailing, left, right, centerX
+  case leading, trailing, left, right, centerX
 
-    internal var keypath: KeyPath<Constrainable, NSLayoutXAxisAnchor> {
-        switch self {
-        case .leading:
-            return \Constrainable.leadingAnchor
-        case .trailing:
-            return \Constrainable.trailingAnchor
-        case .left:
-            return \Constrainable.leftAnchor
-        case .right:
-            return \Constrainable.rightAnchor
-        case .centerX:
-            return \Constrainable.centerXAnchor
-        }
+  @usableFromInline
+  internal var keypath: KeyPath<Constrainable, NSLayoutXAxisAnchor> {
+    switch self {
+    case .leading:
+      return \Constrainable.leadingAnchor
+    case .trailing:
+      return \Constrainable.trailingAnchor
+    case .left:
+      return \Constrainable.leftAnchor
+    case .right:
+      return \Constrainable.rightAnchor
+    case .centerX:
+      return \Constrainable.centerXAnchor
     }
+  }
 }

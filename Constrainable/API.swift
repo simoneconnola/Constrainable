@@ -18,6 +18,7 @@ import Foundation
     - priority: The priority of the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint.  The default value is `nil`.
 */
+@inlinable
 public func pin(
   _ xAxisAnchor: XAxisAnchor,
   to referenceXAxisAnchor: XAxisAnchor,
@@ -58,6 +59,7 @@ public func pin(
     - priority: The priority of the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint.  The default value is `nil`.
 */
+@inlinable
 public func pin(
   _ yAxisAnchor: YAxisAnchor,
   to referenceYAxisAnchor: YAxisAnchor,
@@ -98,6 +100,7 @@ public func pin(
     - priority: The priority of the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint.  The default value is `nil`.
 */
+@inlinable
 public func match(
   _ dimensionAnchor: DimensionAnchor,
   to referenceDimensionAnchor: DimensionAnchor,
@@ -142,6 +145,7 @@ public func match(
     - priority: The priority of the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint.  The default value is `nil`.
 */
+@inlinable
 public func match(
   _ xAxisAnchor: XAxisAnchor,
   of reference: Constrainable,
@@ -185,6 +189,7 @@ public func match(
     - priority: The priority of the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint.  The default value is `nil`.
 */
+@inlinable
 public func match(
   _ yAxisAnchor: YAxisAnchor,
   of reference: Constrainable,
@@ -228,6 +233,7 @@ public func match(
     - priority: The priority of the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint.  The default value is `nil`.
 */
+@inlinable
 public func match(
   _ dimensionAnchor: DimensionAnchor,
   of reference: Constrainable,
@@ -264,6 +270,7 @@ public func match(
     - priority: The priority of the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint.  The default value is `nil`.
 */
+@inlinable
 public func set(
   _ dimensionAnchor: DimensionAnchor,
   to constant: CGFloat,
@@ -299,6 +306,7 @@ public func set(
     - heightIdentifier: The name that identifies the height constraint. The default value is `nil`.
     - widthIdentifier: The name that identifies the width constraint. The default value is `nil`.
 */
+@inlinable
 public func set(
   size: CGSize,
   heightMultiplier: CGFloat?,
@@ -349,6 +357,7 @@ public func set(
     - priority: The priority for the resulting constraint.  The default value is `.required`.
     - identifier: The name that identifies the resulting constraint. The default value is `nil`.
 */
+@inlinable
 public func set(
   aspectRatio ratio: CGFloat,
   priority: UILayoutPriority = .required,
@@ -387,6 +396,7 @@ public func set(
     - xIdentifier: The name that identifies the horizontal center constraint. The default value is `nil`.
     - yIdentifier: The name that identifies the vertical center  constraint. The default value is `nil`.
 */
+@inlinable
 public func matchCenter(
   of reference: Constrainable,
   xOffset: CGFloat = 0,
@@ -447,6 +457,7 @@ public func matchCenter(
     - heightIdentifier: The name that identifies the height constraint. The default value is `nil`.
     - widthIdentifier: The name that identifies the width constraint. The default value is `nil`.
 */
+@inlinable
 public func matchSize(
   of reference: Constrainable,
   heightRelation: ConstraintsRelation? = nil,
@@ -512,6 +523,7 @@ public func matchSize(
     - leadingIdentifier: The name that identifies the leading constraint. The default value is `nil`.
     - trailingIdentifier: The name that identifies the trailing constraint. The default value is `nil`.
 */
+@inlinable
 public func matchEdges(
   of reference: Constrainable,
   with insets: UIEdgeInsets = .zero,

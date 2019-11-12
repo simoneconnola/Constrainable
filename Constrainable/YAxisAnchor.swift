@@ -4,21 +4,22 @@ import Foundation
 ///
 /// Includes: *top, bottom, centerY, firstBaseline, lastBaseline*
 public enum YAxisAnchor {
-    case top, bottom, centerY, firstBaseline, lastBaseline
+  case top, bottom, centerY, firstBaseline, lastBaseline
 
-    internal var keypath: KeyPath<Constrainable, NSLayoutYAxisAnchor> {
+  @usableFromInline
+  internal var keypath: KeyPath<Constrainable, NSLayoutYAxisAnchor> {
 
-        switch self {
-        case .top:
-            return \Constrainable.topAnchor
-        case .bottom:
-            return \Constrainable.bottomAnchor
-        case .centerY:
-            return \Constrainable.centerYAnchor
-        case .firstBaseline:
-            return \Constrainable.firstBaselineAnchor
-        case .lastBaseline:
-            return \Constrainable.lastBaselineAnchor
-        }
+    switch self {
+    case .top:
+      return \Constrainable.topAnchor
+    case .bottom:
+      return \Constrainable.bottomAnchor
+    case .centerY:
+      return \Constrainable.centerYAnchor
+    case .firstBaseline:
+      return \Constrainable.firstBaselineAnchor
+    case .lastBaseline:
+      return \Constrainable.lastBaselineAnchor
     }
+  }
 }

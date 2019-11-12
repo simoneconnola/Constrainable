@@ -1,6 +1,7 @@
 import Foundation
 
-func pin<Anchor, Axis>(
+@usableFromInline
+internal func pin<Anchor, Axis>(
   _ originKeyPath: KeyPath<Constrainable, Anchor>,
   to referenceKeyPath: KeyPath<Constrainable, Anchor>,
   of reference: Constrainable,
@@ -41,7 +42,8 @@ func pin<Anchor, Axis>(
   }
 }
 
-func match<LayoutDimension>(
+@usableFromInline
+internal func match<LayoutDimension>(
   _ originKeyPath: KeyPath<Constrainable, LayoutDimension>,
   to referenceKeyPath: KeyPath<Constrainable, LayoutDimension>,
   of reference: Constrainable, relation: ConstraintsRelation = .equal,
@@ -81,7 +83,8 @@ func match<LayoutDimension>(
   }
 }
 
-func match<Anchor, Axis>(
+@usableFromInline
+internal func match<Anchor, Axis>(
   _ keyPath: KeyPath<Constrainable, Anchor>,
   of reference: Constrainable,
   relation: ConstraintsRelation = .equal,
@@ -101,7 +104,8 @@ func match<Anchor, Axis>(
   )
 }
 
-func match<LayoutDimension>(
+@usableFromInline
+internal func match<LayoutDimension>(
   _ keyPath: KeyPath<Constrainable, LayoutDimension>,
   of reference: Constrainable,
   relation: ConstraintsRelation = .equal,
@@ -121,7 +125,8 @@ func match<LayoutDimension>(
   )
 }
 
-func set<LayoutDimension>(
+@usableFromInline
+internal func set<LayoutDimension>(
   _ keyPath: KeyPath<Constrainable, LayoutDimension>,
   to constant: CGFloat,
   multiplier: CGFloat = 1,

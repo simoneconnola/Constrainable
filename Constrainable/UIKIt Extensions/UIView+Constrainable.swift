@@ -15,7 +15,9 @@ extension UIView: Constrainable {
   /// ```
   /// - Parameter factories: An array of constraints factories.
   /// - Important: invoking this method sets `translatesAutoresizingMaskIntoConstraints` to false!
-  @discardableResult public func constrain(_ factories: [ConstraintsFactory]) -> [NSLayoutConstraint] {
+  @inlinable
+  @discardableResult
+  public func constrain(_ factories: [ConstraintsFactory]) -> [NSLayoutConstraint] {
     let constraints = makeConstraints(factories)
     NSLayoutConstraint.activate(constraints)
     return constraints
@@ -34,7 +36,9 @@ extension UIView: Constrainable {
   /// ```
   /// - Parameter factories: Some constraints factory or factories.
   /// - Important: invoking this method sets `translatesAutoresizingMaskIntoConstraints` to false!
-  @discardableResult public func constrain(_ factories: ConstraintsFactory...) -> [NSLayoutConstraint] {
+  @inlinable
+  @discardableResult
+  public func constrain(_ factories: ConstraintsFactory...) -> [NSLayoutConstraint] {
     let constraints = makeConstraints(factories)
     NSLayoutConstraint.activate(constraints)
     return constraints
@@ -55,6 +59,7 @@ extension UIView: Constrainable {
   /// ```
   /// - Parameter factories: An array of constraints factories.
   /// - Important: invoking this method sets `translatesAutoresizingMaskIntoConstraints` to false!
+  @inlinable
   public func makeConstraints(_ factories: [ConstraintsFactory]) -> [NSLayoutConstraint] {
     translatesAutoresizingMaskIntoConstraints = false
     return factories.flatMap { $0(self) }
@@ -75,6 +80,7 @@ extension UIView: Constrainable {
   ///  ```
   /// - Parameter factories: Some constraints factory or factories.
   /// - Important: invoking this method sets `translatesAutoresizingMaskIntoConstraints` to false!
+  @inlinable
   public func makeConstraints(_ factories: ConstraintsFactory...) -> [NSLayoutConstraint] {
     translatesAutoresizingMaskIntoConstraints = false
     return factories.flatMap { $0(self) }

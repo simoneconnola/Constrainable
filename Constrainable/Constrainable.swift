@@ -75,7 +75,8 @@ public protocol Constrainable {
    ```
    - Parameter factories: An array of constraints factories.
    */
-  @discardableResult func constrain(_ factories: [ConstraintsFactory]) -> [NSLayoutConstraint]
+  @discardableResult
+  func constrain(_ factories: [ConstraintsFactory]) -> [NSLayoutConstraint]
 
   /**
    Generate and activate an array of constraints for this type.
@@ -91,5 +92,6 @@ public protocol Constrainable {
    ```
    - Parameter factories: Some constraints factory or factories.
    */
-  @discardableResult func constrain(_ factories: ConstraintsFactory...) -> [NSLayoutConstraint]
+  @discardableResult
+  func constrain(_ factories: ConstraintsFactory...) -> [NSLayoutConstraint]
 }
