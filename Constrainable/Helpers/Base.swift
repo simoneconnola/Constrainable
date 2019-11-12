@@ -5,7 +5,7 @@ internal func pin<Anchor, Axis>(
   _ originKeyPath: KeyPath<Constrainable, Anchor>,
   to referenceKeyPath: KeyPath<Constrainable, Anchor>,
   of reference: Constrainable,
-  relation: ConstraintsRelation = .equal,
+  relation: NSLayoutConstraint.Relation = .equal,
   offset: CGFloat = 0,
   multiplier: CGFloat = 1,
   priority: UILayoutPriority = .required,
@@ -35,6 +35,8 @@ internal func pin<Anchor, Axis>(
           constant: offset
         )
         .withMultiplier(multiplier)
+    @unknown default:
+      fatalError()
     }
     constraint.priority = priority
     constraint.identifier = identifier
@@ -46,7 +48,7 @@ internal func pin<Anchor, Axis>(
 internal func match<LayoutDimension>(
   _ originKeyPath: KeyPath<Constrainable, LayoutDimension>,
   to referenceKeyPath: KeyPath<Constrainable, LayoutDimension>,
-  of reference: Constrainable, relation: ConstraintsRelation = .equal,
+  of reference: Constrainable, relation: NSLayoutConstraint.Relation = .equal,
   offset: CGFloat = 0,
   multiplier: CGFloat = 1,
   priority: UILayoutPriority = .required,
@@ -76,6 +78,8 @@ internal func match<LayoutDimension>(
           multiplier: multiplier,
           constant: offset
         )
+    @unknown default:
+      fatalError()
     }
     constraint.identifier = identifier
     constraint.priority = priority
@@ -87,7 +91,7 @@ internal func match<LayoutDimension>(
 internal func match<Anchor, Axis>(
   _ keyPath: KeyPath<Constrainable, Anchor>,
   of reference: Constrainable,
-  relation: ConstraintsRelation = .equal,
+  relation: NSLayoutConstraint.Relation = .equal,
   offset: CGFloat = 0,
   multiplier: CGFloat = 1,
   priority: UILayoutPriority = .required,
@@ -108,7 +112,7 @@ internal func match<Anchor, Axis>(
 internal func match<LayoutDimension>(
   _ keyPath: KeyPath<Constrainable, LayoutDimension>,
   of reference: Constrainable,
-  relation: ConstraintsRelation = .equal,
+  relation: NSLayoutConstraint.Relation = .equal,
   offset: CGFloat = 0,
   multiplier: CGFloat = 1,
   priority: UILayoutPriority = .required,
