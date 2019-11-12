@@ -309,8 +309,8 @@ public func set(
 @inlinable
 public func set(
   size: CGSize,
-  heightMultiplier: CGFloat?,
-  widthMultiplier: CGFloat?,
+  heightMultiplier: CGFloat? = nil,
+  widthMultiplier: CGFloat? = nil,
   multiplier: CGFloat = 1,
   heightPriority: UILayoutPriority? = nil,
   widthPriority: UILayoutPriority? = nil,

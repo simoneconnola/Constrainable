@@ -123,11 +123,11 @@
 		1DBC736F237A950700C92714 /* ConstrainableTests */ = {
 			isa = PBXGroup;
 			children = (
+				1DBC7381237AA8F700C92714 /* APITests.swift */,
 				1DBC7370237A950700C92714 /* ConstrainableUIVIewTests.swift */,
 				1DBC737F237AA60300C92714 /* ConstrainableUILayoutGuideTests.swift */,
 				1DBC7372237A950700C92714 /* Info.plist */,
 				1DBC737D237AA24800C92714 /* Utilities.swift */,
-				1DBC7381237AA8F700C92714 /* APITests.swift */,
 			);
 			path = ConstrainableTests;
 			sourceTree = "<group>";
