@@ -1,6 +1,6 @@
 # Constrainable
 
-![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-5.1-orange.svg)
 [![](http://img.shields.io/badge/iOS-11.0%2B-blue.svg)]()
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -61,127 +61,87 @@ view.addLayoutGuide(container)
 view.addLayoutGuide(spacer)
 
 // Container has the same edges as the view's layoutMarginsGuide
-container.activate(
-    constraint(edgesTo: view.layoutMarginsGuide)
+container.constrain(
+    matchEdges(of: view.layoutMarginsGuide)
 )
 
 // firstLabel and secondLabel are vertically centered in the container, have the same width and are separated by a 20 points spacer
-firstLabel.activate([
-    constraint(same: \.centerYAnchor, as: container),
-    constraint(same: \.leadingAnchor, as: container),
-    constraint(\.trailingAnchor, to: \.leadingAnchor, of: spacer)
-])
+firstLabel.constrain(
+    match(.centerY, of: container),
+    match(.leading, of: container),
+    pin(.trailing, to: .leading, of: spacer)
+)
 
-spacer.activate([
-    constraint(\.widthAnchor, to: 20)
-])
+spacer.constrain(
+    set(.width, to: 20)
+)
 
-secondLabel.activate([
-    constraint(same: \.centerYAnchor, as: firstLabel),
-    constraint(same: \.trailingAnchor, as: container),
-    constraint(\.leadingAnchor, to: \.trailingAnchor, of: spacer),
-    constraint(same: \.widthAnchor, as: firstLabel),
-])
+secondLabel.constrain(
+    match(.centerY, of: firstLabel),
+    match(.trailing, of: container),
+    pin(.leading, to: .trailing, of: spacer),
+    match(.width, of: firstLabel),
+)
 ```
 ## Full NSLayoutConstraint features:
 
-You can specify the kind of relation between constrainable objects (equal, lessThanOrEqual, greaterThanOrEqual), the constant, the multiplier (even for NSLayoutAnchor), and the layout priority
+You can specify the kind of relation between constrainable types (equal, lessThanOrEqual, greaterThanOrEqual), the constant, the multiplier (even for NSLayoutAnchor), and the layout priority
 
 ```Swift
-constraint(\.topAnchor, to: \.bottomAnchor, of: someView, relation: .lessThanOrEqual, offset: 10, multiplier: 0.5, priority: .defaultLow)
+pin(
+    .top, 
+    to: .bottom, 
+    of: someView, 
+    relation: .lessThanOrEqual, 
+    offset: 10, 
+    multiplier: 0.5, 
+    priority: .defaultLow
+)
 ```
-
-## Shorthand:
-
-Since version 1.0 you can decide to use shorthand for KeyPaths:
-```Swift
-constraint(.top, to: .bottom, of: someView)
-```
-instead of:
-```Swift
-constraint(\.topAnchor, to: \.bottomAnchor, of: someView)
-```
-
-**with autocomplete!** 🎉
 
 ## Tips and tricks:
 
 • You can constrain a dimension to a constant: 
 ```Swift
-constraint(.width, to: 10)
-constraint(.height, to: 10)
+set(.width, to: 10)
+set(.height, to: 10)
 ```
 • If you are constraining two objects to the same anchor, you can use the "same" shorthand:
 ```Swift
 // This:
-constraint(.top, to: .top, of: someView)
-constraint(.width, to: .width, of: someView)
+pin(.top, to: .top, of: someView)
+pin(.width, to: .width, of: someView)
 
 // Is the same as this:
-constraint(same: .top, as: someView)
-constraint(same: .width, as: someView)
+match(.top, of: someView)
+match(.width, of: someView)
 ```
 
 • You can constrain both dimension at the same time:
 ```Swift
 // This:
-constraint(same: .height, as: someView, multiplier: 2)
-constraint(same: .width, as: someView, multiplier: 2)
+match(.height, of: someView, multiplier: 2)
+match(.width, of: someView, multiplier: 2)
 
 // Is the same as this:
-constraint(sizeAs: someView, multiplier: 2)
+matchSize(of: someView, multiplier: 2)
 ```
 
-• You can constrain all the edges at once (with insets, even):
+• You can set an aspect ratio easily:
+```Swift
+set(aspectRatio: 2) // width == height * 2
+```
+
+
+• You can constrain all the edges at once (with or without insets):
 ```Swift
 // This:
-constraint(same: .top, as: someView, offset: 10)
-constraint(same: .bottom, as: someView, offset: -10)
-constraint(same: .leading, as: someView, offset: 10)
-constraint(same: .trailing, as: someView, offset: -10)
+match(.top, of: someView, offset: 10)
+match(.bottom, of: someView, offset: -10)
+match(.leading, of: someView, offset: 10)
+match(.trailing, of: someView, offset: -10)
 
 // Is the same as this:
 let padding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-constraint(edgesTo: someView, with: padding)
-```
-**Note:** The last two functions return an array of constraints instead of a single one!
-```Swift
-// WRONG:
-someOtherView.activate([
-    constraint(edgesTo: someView)
-])
-
-// RIGHT:
-someOtherView.activate(
-    constraint(edgesTo: someView)
-)
-```
-```Swift
-// WRONG:
-someOtherView.activate([
-    constraint(sizeAs: someView),
-    constraint(same: .centerX, as: someView),
-    constraint(same: .centerY, as: someView)
-])
-
-// RIGHT:
-someOtherView.activate(
-    constraint(sizeAs: someView) + [
-    constraint(same: .centerX, as: someView),
-    constraint(same: .centerY, as: someView)
-])
-```
-• For animations, you can store the constraint in a lazy variable:
-```Swift
-lazy var animatableCenterY = constraint(same: .centerY, as: someView)(someOtherView)
-
-someOtherView.activate([
-... // Other constraints
-])
-animatableCenterY.isActive = true
-
-animatableCenterY.constant = 100
-UIView.animate(withDuration: 0.25) {
-    self.view.layoutIfNeeded()
-}
+matchEdges(of: someView, insets: padding)
 ```

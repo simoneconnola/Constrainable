@@ -247,7 +247,7 @@ class APITests: XCTestCase {
 
   // MARK: - Set Size
 
-  func testSetBothDimensions_DefaultOptions() {
+  func testSetSize_DefaultOptions() {
 
     let size = CGSize(width: 10, height: 10)
     let constraints = set(size: size)(view1)
@@ -276,7 +276,7 @@ class APITests: XCTestCase {
     XCTAssertNil(widthConstraint.identifier)
   }
 
-  func testSetBothDimensions_CustomOptions() {
+  func testSetSize_CustomOptions() {
 
     let size = CGSize(width: 10, height: 10)
     let constraints = set(
@@ -311,29 +311,7 @@ class APITests: XCTestCase {
     XCTAssertEqual(widthConstraint.identifier, "width")
   }
 
-  func testSetBothDimensions_HeightMultiplierPrecedence() {
-    let size = CGSize(width: 1, height: 1)
-    let constraints = set(size: size, heightMultiplier: 100, multiplier: 10)(view1)
-
-    let widthConstraint = constraints[0]
-    let heightConstraint = constraints[1]
-
-    XCTAssertEqual(widthConstraint.constant, 10)
-    XCTAssertEqual(heightConstraint.constant, 100)
-  }
-
-  func testSetBothDimensions_WidthMultiplierPrecedence() {
-    let size = CGSize(width: 1, height: 1)
-    let constraints = set(size: size, widthMultiplier: 100, multiplier: 10)(view1)
-
-    let widthConstraint = constraints[0]
-    let heightConstraint = constraints[1]
-
-    XCTAssertEqual(widthConstraint.constant, 100)
-    XCTAssertEqual(heightConstraint.constant, 10)
-  }
-
-  func testSetBothDimensions_BothMultipliersPrecedence() {
+  func testSetSize_MultipliersPrecedence() {
     let size = CGSize(width: 1, height: 1)
     let constraints = set(
       size: size,
@@ -347,6 +325,377 @@ class APITests: XCTestCase {
 
     XCTAssertEqual(widthConstraint.constant, 11)
     XCTAssertEqual(heightConstraint.constant, 22)
+  }
+
+  func testSetSize_PrioritiesPrecedence() {
+    let size = CGSize(width: 1, height: 1)
+    let constraints = set(
+      size: size,
+      heightPriority: .defaultHigh,
+      widthPriority: .defaultLow,
+      priority: .required
+    )(view1)
+
+    let widthConstraint = constraints[0]
+    let heightConstraint = constraints[1]
+
+    XCTAssertEqual(widthConstraint.priority, .defaultLow)
+    XCTAssertEqual(heightConstraint.priority, .defaultHigh)
+  }
+
+  // MARK: - Aspect Ratio
+
+  func testSetAspectRatio_DefaultOptions() {
+    let constraints = set(aspectRatio: 0.5)(view1)
+    let constraint = constraints.first!
+    XCTAssertTrue(constraints.count == 1)
+    XCTAssert(constraint.firstItem === view1)
+    XCTAssert(constraint.secondItem === view1)
+    XCTAssert(constraint.firstAttribute == .width)
+    XCTAssert(constraint.secondAttribute == .height)
+    XCTAssertEqual(constraint.constant, 0)
+    XCTAssertEqual(constraint.multiplier, 0.5)
+    XCTAssertEqual(constraint.priority, .required)
+    XCTAssertNil(constraint.identifier)
+  }
+
+  func testAspectRatio_CustomOptions() {
+    let constraints = set(
+      aspectRatio: 0.5,
+      priority: standardCustomOptions.priority,
+      identifier: standardCustomOptions.identifier
+      )(view1)
+    let constraint = constraints.first!
+    XCTAssertTrue(constraints.count == 1)
+    XCTAssert(constraint.firstItem === view1)
+    XCTAssert(constraint.secondItem === view1)
+    XCTAssert(constraint.firstAttribute == .width)
+    XCTAssert(constraint.secondAttribute == .height)
+    XCTAssertEqual(constraint.constant, 0)
+    XCTAssertEqual(constraint.multiplier, 0.5)
+    XCTAssertEqual(constraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(constraint.identifier, standardCustomOptions.identifier)
+  }
+
+  // MARK: - Match Center
+
+  func testMatchCenter_DefaultOptions() {
+
+    let constraints = matchCenter(of: view2)(view1)
+
+    let horizontalConstraint = constraints[0]
+    let verticalConstraint = constraints[1]
+
+    XCTAssertTrue(constraints.count == 2)
+
+    XCTAssert(verticalConstraint.firstItem === view1)
+    XCTAssert(verticalConstraint.secondItem === view2)
+    XCTAssert(verticalConstraint.firstAttribute == .centerY)
+    XCTAssert(verticalConstraint.secondAttribute == .centerY)
+    XCTAssertEqual(verticalConstraint.constant, 0)
+    XCTAssertEqual(verticalConstraint.multiplier, 1)
+    XCTAssertEqual(verticalConstraint.priority, .required)
+    XCTAssertNil(verticalConstraint.identifier)
+
+    XCTAssert(horizontalConstraint.firstItem === view1)
+    XCTAssert(horizontalConstraint.secondItem === view2)
+    XCTAssert(horizontalConstraint.firstAttribute == .centerX)
+    XCTAssert(horizontalConstraint.secondAttribute == .centerX)
+    XCTAssertEqual(horizontalConstraint.constant, 0)
+    XCTAssertEqual(horizontalConstraint.multiplier, 1)
+    XCTAssertEqual(horizontalConstraint.priority, .required)
+    XCTAssertNil(horizontalConstraint.identifier)
+  }
+
+  func testMatchCenter_CustomOptions() {
+
+    let constraints = matchCenter(
+      of: view2,
+      xOffset: standardCustomOptions.offset,
+      yOffset: standardCustomOptions.offset,
+      xMultiplier: standardCustomOptions.multiplier,
+      yMultiplier: standardCustomOptions.multiplier,
+      priority: standardCustomOptions.priority,
+      xIdentifier: "horizontal",
+      yIdentifier: "vertical"
+    )(view1)
+
+    let horizontalConstraint = constraints[0]
+    let verticalConstraint = constraints[1]
+
+    XCTAssertTrue(constraints.count == 2)
+
+    XCTAssert(verticalConstraint.firstItem === view1)
+    XCTAssert(verticalConstraint.secondItem === view2)
+    XCTAssert(verticalConstraint.firstAttribute == .centerY)
+    XCTAssert(verticalConstraint.secondAttribute == .centerY)
+    XCTAssertEqual(verticalConstraint.constant, standardCustomOptions.offset)
+    XCTAssertEqual(verticalConstraint.multiplier, standardCustomOptions.multiplier)
+    XCTAssertEqual(verticalConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(verticalConstraint.identifier, "vertical")
+
+    XCTAssert(horizontalConstraint.firstItem === view1)
+    XCTAssert(horizontalConstraint.secondItem === view2)
+    XCTAssert(horizontalConstraint.firstAttribute == .centerX)
+    XCTAssert(horizontalConstraint.secondAttribute == .centerX)
+    XCTAssertEqual(horizontalConstraint.constant, standardCustomOptions.offset)
+    XCTAssertEqual(horizontalConstraint.multiplier, standardCustomOptions.multiplier)
+    XCTAssertEqual(horizontalConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(horizontalConstraint.identifier, "horizontal")
+  }
+
+  func testMatchCenter_PrioritiesPrecedence() {
+    let constraints = matchCenter(
+      of: view2,
+      xPriority: .defaultHigh,
+      yPriority: .defaultLow,
+      priority: .required
+    )(view1)
+
+    let horizontalConstraint = constraints[0]
+    let verticalConstraint = constraints[1]
+
+    XCTAssertEqual(horizontalConstraint.priority, .defaultHigh)
+    XCTAssertEqual(verticalConstraint.priority, .defaultLow)
+  }
+
+  // MARK: - Match Size
+
+  func testMatchSize_DefaultOptions() {
+
+    let constraints = matchSize(of: view2)(view1)
+
+    let widthConstraint = constraints[0]
+    let heightConstraint = constraints[1]
+
+    XCTAssertTrue(constraints.count == 2)
+
+    XCTAssert(heightConstraint.firstItem === view1)
+    XCTAssert(heightConstraint.secondItem === view2)
+    XCTAssert(heightConstraint.firstAttribute == .height)
+    XCTAssert(heightConstraint.secondAttribute == .height)
+    XCTAssertEqual(heightConstraint.constant, 0)
+    XCTAssertEqual(heightConstraint.multiplier, 1)
+    XCTAssertEqual(heightConstraint.priority, .required)
+    XCTAssertNil(heightConstraint.identifier)
+
+    XCTAssert(widthConstraint.firstItem === view1)
+    XCTAssert(widthConstraint.secondItem === view2)
+    XCTAssert(widthConstraint.firstAttribute == .width)
+    XCTAssert(widthConstraint.secondAttribute == .width)
+    XCTAssertEqual(widthConstraint.constant, 0)
+    XCTAssertEqual(widthConstraint.multiplier, 1)
+    XCTAssertEqual(widthConstraint.priority, .required)
+    XCTAssertNil(widthConstraint.identifier)
+  }
+
+  func testMatchSize_CustomOptions() {
+
+    let constraints = matchSize(
+      of: view2,
+      relation: standardCustomOptions.relation,
+      multiplier: standardCustomOptions.multiplier,
+      priority: standardCustomOptions.priority,
+      heightIdentifier: "height",
+      widthIdentifier: "width"
+    )(view1)
+
+    let widthConstraint = constraints[0]
+    let heightConstraint = constraints[1]
+
+    XCTAssertTrue(constraints.count == 2)
+
+    XCTAssert(heightConstraint.firstItem === view1)
+    XCTAssert(heightConstraint.secondItem === view2)
+    XCTAssert(heightConstraint.firstAttribute == .height)
+    XCTAssert(heightConstraint.secondAttribute == .height)
+    XCTAssertEqual(heightConstraint.constant, 0)
+    XCTAssertEqual(heightConstraint.multiplier, standardCustomOptions.multiplier)
+    XCTAssertEqual(heightConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(heightConstraint.identifier, "height")
+
+    XCTAssert(widthConstraint.firstItem === view1)
+    XCTAssert(widthConstraint.secondItem === view2)
+    XCTAssert(widthConstraint.firstAttribute == .width)
+    XCTAssert(widthConstraint.secondAttribute == .width)
+    XCTAssertEqual(widthConstraint.constant, 0)
+    XCTAssertEqual(widthConstraint.multiplier, standardCustomOptions.multiplier)
+    XCTAssertEqual(widthConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(widthConstraint.identifier, "width")
+  }
+
+  func testMatchSize_RelationsPrecedence() {
+    let constraints = matchSize(
+      of: view2,
+      heightRelation: .greaterThanOrEqual,
+      widthRelation: .lessThanOrEqual,
+      relation: .equal
+    )(view1)
+
+    let widthConstraint = constraints[0]
+    let heightConstraint = constraints[1]
+
+    XCTAssertEqual(widthConstraint.relation, .lessThanOrEqual)
+    XCTAssertEqual(heightConstraint.relation, .greaterThanOrEqual)
+  }
+
+  func testMatchSize_MultipliersPrecedence() {
+    let constraints = matchSize(
+      of: view2,
+      heightMultiplier: 22,
+      widthMultiplier: 11,
+      multiplier: 10000
+    )(view1)
+
+    let widthConstraint = constraints[0]
+    let heightConstraint = constraints[1]
+
+    XCTAssertEqual(widthConstraint.multiplier, 11)
+    XCTAssertEqual(heightConstraint.multiplier, 22)
+  }
+
+  func testMatchSize_PrioritiesPrecedence() {
+    let constraints = matchSize(
+      of: view2,
+      heightPriority: .defaultHigh,
+      widthPriority: .defaultLow,
+      priority: .required
+    )(view1)
+
+    let widthConstraint = constraints[0]
+    let heightConstraint = constraints[1]
+
+    XCTAssertEqual(widthConstraint.priority, .defaultLow)
+    XCTAssertEqual(heightConstraint.priority, .defaultHigh)
+  }
+
+  // MARK: - Match Edges
+
+  func testMatchEdges_DefaultOptions() {
+
+    let constraints = matchEdges(of: view2)(view1)
+
+    let topConstraint = constraints[0]
+    let bottomConstraint = constraints[1]
+    let leadingConstraint = constraints[2]
+    let trailingConstraint = constraints[3]
+
+    XCTAssertTrue(constraints.count == 4)
+
+    XCTAssert(topConstraint.firstItem === view1)
+    XCTAssert(topConstraint.secondItem === view2)
+    XCTAssert(topConstraint.firstAttribute == .top)
+    XCTAssert(topConstraint.secondAttribute == .top)
+    XCTAssertEqual(topConstraint.constant, 0)
+    XCTAssertEqual(topConstraint.multiplier, 1)
+    XCTAssertEqual(topConstraint.priority, .required)
+    XCTAssertNil(topConstraint.identifier)
+
+    XCTAssert(bottomConstraint.firstItem === view1)
+    XCTAssert(bottomConstraint.secondItem === view2)
+    XCTAssert(bottomConstraint.firstAttribute == .bottom)
+    XCTAssert(bottomConstraint.secondAttribute == .bottom)
+    XCTAssertEqual(bottomConstraint.constant, 0)
+    XCTAssertEqual(bottomConstraint.multiplier, 1)
+    XCTAssertEqual(bottomConstraint.priority, .required)
+    XCTAssertNil(bottomConstraint.identifier)
+
+    XCTAssert(leadingConstraint.firstItem === view1)
+    XCTAssert(leadingConstraint.secondItem === view2)
+    XCTAssert(leadingConstraint.firstAttribute == .leading)
+    XCTAssert(leadingConstraint.secondAttribute == .leading)
+    XCTAssertEqual(leadingConstraint.constant, 0)
+    XCTAssertEqual(leadingConstraint.multiplier, 1)
+    XCTAssertEqual(leadingConstraint.priority, .required)
+    XCTAssertNil(leadingConstraint.identifier)
+
+    XCTAssert(trailingConstraint.firstItem === view1)
+    XCTAssert(trailingConstraint.secondItem === view2)
+    XCTAssert(trailingConstraint.firstAttribute == .trailing)
+    XCTAssert(trailingConstraint.secondAttribute == .trailing)
+    XCTAssertEqual(trailingConstraint.constant, 0)
+    XCTAssertEqual(trailingConstraint.multiplier, 1)
+    XCTAssertEqual(trailingConstraint.priority, .required)
+    XCTAssertNil(trailingConstraint.identifier)
+  }
+
+  func testMatchEdges_CustomOptions() {
+
+    let insets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+
+    let constraints = matchEdges(
+      of: view2,
+      insets: insets,
+      priority: standardCustomOptions.priority,
+      topIdentifier: "top",
+      bottomIdentifier: "bottom",
+      leadingIdentifier: "leading",
+      trailingIdentifier: "trailing"
+    )(view1)
+
+    let topConstraint = constraints[0]
+    let bottomConstraint = constraints[1]
+    let leadingConstraint = constraints[2]
+    let trailingConstraint = constraints[3]
+
+    XCTAssertTrue(constraints.count == 4)
+
+    XCTAssert(topConstraint.firstItem === view1)
+    XCTAssert(topConstraint.secondItem === view2)
+    XCTAssert(topConstraint.firstAttribute == .top)
+    XCTAssert(topConstraint.secondAttribute == .top)
+    XCTAssertEqual(topConstraint.constant, insets.top)
+    XCTAssertEqual(topConstraint.multiplier, 1)
+    XCTAssertEqual(topConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(topConstraint.identifier, "top")
+
+    XCTAssert(bottomConstraint.firstItem === view1)
+    XCTAssert(bottomConstraint.secondItem === view2)
+    XCTAssert(bottomConstraint.firstAttribute == .bottom)
+    XCTAssert(bottomConstraint.secondAttribute == .bottom)
+    XCTAssertEqual(bottomConstraint.constant, -insets.bottom)
+    XCTAssertEqual(bottomConstraint.multiplier, 1)
+    XCTAssertEqual(bottomConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(bottomConstraint.identifier, "bottom")
+
+    XCTAssert(leadingConstraint.firstItem === view1)
+    XCTAssert(leadingConstraint.secondItem === view2)
+    XCTAssert(leadingConstraint.firstAttribute == .leading)
+    XCTAssert(leadingConstraint.secondAttribute == .leading)
+    XCTAssertEqual(leadingConstraint.constant, insets.left)
+    XCTAssertEqual(leadingConstraint.multiplier, 1)
+    XCTAssertEqual(leadingConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(leadingConstraint.identifier, "leading")
+
+    XCTAssert(trailingConstraint.firstItem === view1)
+    XCTAssert(trailingConstraint.secondItem === view2)
+    XCTAssert(trailingConstraint.firstAttribute == .trailing)
+    XCTAssert(trailingConstraint.secondAttribute == .trailing)
+    XCTAssertEqual(trailingConstraint.constant, -insets.right)
+    XCTAssertEqual(trailingConstraint.multiplier, 1)
+    XCTAssertEqual(trailingConstraint.priority, standardCustomOptions.priority)
+    XCTAssertEqual(trailingConstraint.identifier, "trailing")
+  }
+
+  func testMatchEdges_PrioritiesPrecedence() {
+    let constraints = matchEdges(
+      of: view2,
+      topPriority: .defaultHigh,
+      bottomPriority: .defaultLow,
+      leadingPriority: .fittingSizeLevel,
+      trailingPriority: .dragThatCannotResizeScene,
+      priority: .required
+    )(view1)
+
+    let topConstraint = constraints[0]
+    let bottomConstraint = constraints[1]
+    let leadingConstraint = constraints[2]
+    let trailingConstraint = constraints[3]
+
+    XCTAssertEqual(topConstraint.priority, .defaultHigh)
+    XCTAssertEqual(bottomConstraint.priority, .defaultLow)
+    XCTAssertEqual(leadingConstraint.priority, .fittingSizeLevel)
+    XCTAssertEqual(trailingConstraint.priority, .dragThatCannotResizeScene)
   }
 }
 

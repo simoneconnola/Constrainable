@@ -463,8 +463,8 @@ public func matchSize(
   heightRelation: NSLayoutConstraint.Relation? = nil,
   widthRelation: NSLayoutConstraint.Relation? = nil,
   relation: NSLayoutConstraint.Relation = .equal,
-  heightMultiplier: CGFloat?,
-  widthMultiplier: CGFloat?,
+  heightMultiplier: CGFloat? = nil,
+  widthMultiplier: CGFloat? = nil,
   multiplier: CGFloat = 1,
   heightPriority: UILayoutPriority? = nil,
   widthPriority: UILayoutPriority? = nil,
@@ -526,7 +526,7 @@ public func matchSize(
 @inlinable
 public func matchEdges(
   of reference: Constrainable,
-  with insets: UIEdgeInsets = .zero,
+  insets: UIEdgeInsets = .zero,
   topPriority: UILayoutPriority? = nil,
   bottomPriority: UILayoutPriority? = nil,
   leadingPriority: UILayoutPriority? = nil,
