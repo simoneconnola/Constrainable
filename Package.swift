@@ -23,7 +23,7 @@ let package = Package(
             path: "Constrainable"),
         .testTarget(
             name: "ConstrainableTests",
-            dependencies: ["Constrainable"]),
-            path: "ConstrainableTests",
+            dependencies: ["Constrainable"],
+            path: "ConstrainableTests"),
     ]
 )
