@@ -41,6 +41,8 @@
 		1D0F27C32032F1610081802A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D0F27D92032F16F0081802A /* Constrainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constrainable.swift; sourceTree = "<group>"; };
 		1D0F27DD2032F25A0081802A /* NSLayoutConstraint + multiplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint + multiplier.swift"; sourceTree = "<group>"; };
+		1D2154F623A8DBD00059937E /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		1D2154F723A8DC910059937E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1DBC736E237A950700C92714 /* ConstrainableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConstrainableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DBC7370237A950700C92714 /* ConstrainableUIVIewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstrainableUIVIewTests.swift; sourceTree = "<group>"; };
 		1DBC7372237A950700C92714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +81,8 @@
 		1D0F27B52032F1610081802A = {
 			isa = PBXGroup;
 			children = (
+				1D2154F623A8DBD00059937E /* Package.swift */,
+				1D2154F723A8DC910059937E /* README.md */,
 				1D0F27C12032F1610081802A /* Constrainable */,
 				1DBC736F237A950700C92714 /* ConstrainableTests */,
 				1D0F27C02032F1610081802A /* Products */,
