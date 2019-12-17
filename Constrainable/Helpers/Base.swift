@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 @usableFromInline
 internal func pin<Anchor, Axis>(
