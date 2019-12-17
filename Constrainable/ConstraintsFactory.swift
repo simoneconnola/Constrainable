@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// A factory function that takes a Constrainable type and returns an array of NSLayoutConstraint.
 /// - parameter constrainable: The type for wich to generate constraints.

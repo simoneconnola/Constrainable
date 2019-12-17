@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 /// An enumeration representing the constraint anchors on the horizontal axis.
 ///

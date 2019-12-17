@@ -1,5 +1,4 @@
-import Foundation
-
+import UIKit
 /**
   Returns a constraints factory that given a Constrainable type will generate an array
   containing the constraint between the specified anchors, with the supplied options.
